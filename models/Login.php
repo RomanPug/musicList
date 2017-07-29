@@ -10,10 +10,18 @@ class Login extends Model
     public $email;
     public $password;
 
+    public function attributeLabels()
+    {
+        return [
+            'email' => 'E-mail:',
+            'password' => 'Пароль:'
+        ];
+    }
+
     public function rules()
     {
         return [
-            [['email', 'name', 'password'], 'required'],
+            [['email', 'password'], 'required', 'message' => 'Поле не может быть пустым'],
             ['email', 'email'],
             ['password', 'validatePassword'],
         ];

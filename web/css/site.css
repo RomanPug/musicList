@@ -1,6 +1,7 @@
 html,
 body {
     height: 100%;
+    color: #8c8c8c;
 
 }
 
@@ -9,4 +10,38 @@ section {
     width:100%;
     height:100%;
     background-size: cover;
+}
+
+.login_wrap {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.signup {
+    padding-left: 110px;
+    padding-top: 5px;
+    font-size: 17px;
+}
+
+.singup_reg {
+    color: #5cb85c;
+
+}
+
+.singup_reg:hover {
+    color: red;
+}
+
+.container-middle {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.rowrow {
+    display: table-cell;
+    vertical-align: middle;
 }

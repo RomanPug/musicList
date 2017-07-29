@@ -2,15 +2,24 @@
 
 namespace app\controllers;
 
-use Yii;
-use yii\filters\AccessControl;
+use app\models\Login;
 use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use Yii;
 
 class SiteController extends Controller
 {
+    public function actionIndex()
+    {
+        $login_model = new Login();
 
+        return $this->render('index', compact('login_model'));
+
+    }
+
+    public function actionLogin()
+    {
+        $login_model = new Login();
+
+        return $this->render('login', compact('login_model'));
+    }
 }
