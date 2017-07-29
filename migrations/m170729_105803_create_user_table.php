@@ -1,0 +1,30 @@
+<?php
+
+use yii\db\Migration;
+
+/**
+ * Handles the creation of table `user`.
+ */
+class m170729_105803_create_user_table extends Migration
+{
+    /**
+     * @inheritdoc
+     */
+    public function up()
+    {
+        $this->createTable('user', [
+            'id' => $this->primaryKey(),
+            'email' => $this->string(100),
+            'name' => $this->string(25),
+            'password' => $this->string(15),
+        ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function down()
+    {
+        $this->dropTable('user');
+    }
+}
