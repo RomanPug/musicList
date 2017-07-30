@@ -21,7 +21,6 @@ section {
 }
 
 .signup {
-    padding-left: 110px;
     padding-top: 5px;
     font-size: 17px;
 }
@@ -41,7 +40,14 @@ section {
     width: 100%;
 }
 
-.rowrow {
+.row-middle {
     display: table-cell;
     vertical-align: middle;
+}
+
+.btn-sign {
+    padding: 6px 12px;
+    display: inline-block;
+    float: left;
+    margin-right: 15px;
 }

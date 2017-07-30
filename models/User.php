@@ -23,7 +23,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     public static function findIdentity($id){
-        return self::findOne($id);
+        return static::findOne($id);
     }
 
     public static function findIdentityByAccessToken($token, $type = NULL){
@@ -35,10 +35,10 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     public function getAuthKey(){
-
+        return $this->auth_key;
     }
 
     public function validateAuthKey($authKey){
-
+        return $this->auth_key === $authKey;
     }
 }

@@ -17,6 +17,7 @@ class m170729_105803_create_user_table extends Migration
             'email' => $this->string(100),
             'name' => $this->string(25),
             'password' => $this->string(15),
+            'auth_key' => $this->string(255),
         ]);
     }
 

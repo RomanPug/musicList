@@ -5,30 +5,33 @@ use yii\helpers\Html;
 
 ?>
 
-<section >
+<section>
 
     <div class="container container-middle">
 
-        <div class="row rowrow">
+        <div class="row row-middle">
             <div class="col-sm-3"></div>
             <div class="col-sm-6 ">
                 <div class="login_wrap">
-                <h1>Войдите на сайт</h1>
+                    <h1>Войдите на сайт</h1>
+<!--                    --><?//= sha1(5601565) ?>
+                    <?php $form = ActiveForm::begin([
+                        'options' => ['class' => 'form-horizontal'],
+                        'fieldConfig' => [
+                            'template' => "<div class=\"col-md-2\">{label}</div>\n<div class=\"col-md-10\">{input}</div>\n<div class=\"col-md-12 col-md-offset-2\">{error}</div>",
+                            'labelOptions' => ['class' => 'control-label'],
+                        ],
+                    ]); ?>
 
-                <?php $form = ActiveForm::begin([
-                    'options' => ['class' => 'form-horizontal', 'id' =>'add'],
-                    'fieldConfig' => [
-                        'template' => "<div class=\"col-md-2\">{label}</div>\n<div class=\"col-md-10\">{input}</div>\n<div class=\"col-md-12 col-md-offset-2\">{error}</div>",
-                        'labelOptions' => ['class' => 'control-label'],
-                    ],
-                ]); ?>
-
-                <?= $form->field($login_model, 'email')->textInput(['autofocus' => true])?>
-                <?= $form->field($login_model, 'password')->passwordInput()?>
-
-                <?= Html::submitButton('Войти', ['class' => 'btn btn-success col-sm-2 clearfix ']) ?>
-                <div class="signup">или <a class="singup_reg" href="<?= \yii\helpers\Url::to('signup') ?>"> зареестрируйтесь!</a></div>
-                <?php ActiveForm::end(); ?>
+                    <?= $form->field($login_model, 'email')->textInput(['autofocus' => true]) ?>
+                    <?= $form->field($login_model, 'password')->passwordInput() ?>
+                    <?= $form->field($login_model, 'rememberMe')->checkbox([
+                        'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+                    ]) ?>
+                    <?= Html::submitButton('Войти', ['class' => 'btn btn-success btn-sign clearfix ']) ?>
+                    <div class="signup">или <a class="singup_reg" href="<?= \yii\helpers\Url::to('signup') ?>">
+                            зарегестрироваться!</a></div>
+                    <?php ActiveForm::end(); ?>
                 </div>
             </div>
 

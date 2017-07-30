@@ -21,7 +21,7 @@ $config = [
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -44,7 +44,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'login' => 'site/login',
+                'signup' => 'site/signup',
+                'player' => 'player/index',
+                'error' => 'site/error'
 
             ],
         ],
