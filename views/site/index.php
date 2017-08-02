@@ -2,9 +2,7 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-
 ?>
-
 <section>
 
     <div class="container container-middle">
@@ -14,8 +12,8 @@ use yii\helpers\Html;
             <div class="col-sm-6 ">
                 <div class="login_wrap">
                     <h1>Войдите на сайт</h1>
-<!--                    --><?//= sha1(5601565) ?>
                     <?php $form = ActiveForm::begin([
+                        'id' => 'login-form',
                         'options' => ['class' => 'form-horizontal'],
                         'fieldConfig' => [
                             'template' => "<div class=\"col-md-2\">{label}</div>\n<div class=\"col-md-10\">{input}</div>\n<div class=\"col-md-12 col-md-offset-2\">{error}</div>",

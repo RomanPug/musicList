@@ -13,32 +13,50 @@ class User extends ActiveRecord implements IdentityInterface
         return 'user';
     }
 
-    public function setPassword($pass){
-        $this->password = sha1($pass);
+    public function getPlayer()
+    {
+        return $this->hasMany(Player::className(), ['id' => 'user_id']);
+    }
+
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null){}
+
+    public static function findByUseremail($email)
+    {
+        return static::findOne(['email' => $email]);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return $this->auth_key === $authKey;
     }
 
     public function validatePassword($password)
     {
-        return $this->password === sha1($password);
+        return \Yii::$app->security->validatePassword($password, $this->password);
     }
 
-    public static function findIdentity($id){
-        return static::findOne($id);
+    public function setPassword($pass)
+    {
+        return \Yii::$app->security->generatePasswordHash($pass);
     }
 
-    public static function findIdentityByAccessToken($token, $type = NULL){
-
-    }
-
-    public function getId(){
-        return $this->id;
-    }
-
-    public function getAuthKey(){
-        return $this->auth_key;
-    }
-
-    public function validateAuthKey($authKey){
-        return $this->auth_key === $authKey;
+    public function generateAuthKey()
+    {
+        $this->auth_key = \Yii::$app->security->generateRandomString();
     }
 }
