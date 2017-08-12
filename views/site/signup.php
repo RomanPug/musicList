@@ -5,7 +5,7 @@ use yii\helpers\Html;
 
 ?>
 
-<section >
+<section class="main_page">
 
     <div class="container container-middle">
 

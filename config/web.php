@@ -48,7 +48,8 @@ $config = [
                 'logout' => 'site/logout',
                 'signup' => 'site/signup',
                 'player' => 'player/index',
-                'error' => 'site/error'
+                'error' => 'site/error',
+                'playlist' => 'playlist/index',
 
             ],
         ],

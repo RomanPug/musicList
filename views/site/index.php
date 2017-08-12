@@ -3,7 +3,7 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 ?>
-<section>
+<section class="main_page">
 
     <div class="container container-middle">
 
@@ -27,8 +27,7 @@ use yii\helpers\Html;
                         'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
                     ]) ?>
                     <?= Html::submitButton('Войти', ['class' => 'btn btn-success btn-sign clearfix ']) ?>
-                    <div class="signup">или <a class="singup_reg" href="<?= \yii\helpers\Url::to('signup') ?>">
-                            зарегестрироваться!</a></div>
+                    <div class="signup">или <a class="singup_reg" href="<?= \yii\helpers\Url::to('signup') ?>">зарегестрироваться!</a></div>
                     <?php ActiveForm::end(); ?>
                 </div>
             </div>

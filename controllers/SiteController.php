@@ -12,33 +12,37 @@ use Yii;
 class SiteController extends Controller
 {
 
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index', 'logout', 'signup'],
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['index', 'signup'],
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['logout'],
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'only' => ['index', 'logout', 'signup'],
+//                'rules' => [
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['index', 'signup'],
+//                        'roles' => ['?'],
+//                    ],
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['logout'],
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
+//        ];
+//    }
 
     public function actionIndex()
     {
-
+        if (!Yii::$app->user->isGuest) {
+            return Yii::$app->response->redirect(['/player']);
+        }
 
         $login_model = new Login();
+
+
         if ($login_model->load(Yii::$app->request->post()) && $login_model->login()) {
             return Yii::$app->response->redirect(['/player']);
         }

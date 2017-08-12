@@ -59,4 +59,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->auth_key = \Yii::$app->security->generateRandomString();
     }
+
+    public function getName()
+    {
+        return $this->name;
+    }
 }
