@@ -9,6 +9,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use Yii;
 
 class Player extends ActiveRecord
 {
@@ -60,11 +61,20 @@ class Player extends ActiveRecord
     private function fileName()
     {
         $file = 'uploads/' . $this->playlist_id;
-        if (!mkdir($file)) {
-            return mkdir($this->playlist_id);
+
+        if (is_dir($file)) {
+            return $this->playlist_id;
         } else {
+            mkdir($file);
             return $this->playlist_id;
         }
+
+    }
+
+    public function find_music_for_playlist()
+    {
+        $playlist = Yii::$app->request->get('playlist_id');
+        return self::find()->where(['playlist_id' => $playlist])->all();
     }
 
 }
