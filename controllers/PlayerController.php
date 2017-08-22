@@ -20,17 +20,19 @@ class PlayerController extends Controller
 
         $player = new Player();
 
-        if (Yii::$app->request->isPost) {
+        if (Yii::$app->request->post('Player')) {
             $player->user_id = $_POST['Player']['user_id'];
             $player->music_name = $_POST['Player']['music_name'];
             $player->playlist_id = $_POST['Player']['playlist_id'];
             $player->music_default_name_file = UploadedFile::getInstance($player, 'music_default_name_file');
             $player->music_default_name = $player->music_default_name_file->baseName;
+
             $player->save();
 
             if ($player->music_default_name_file && $player->upload()) {
                 return \Yii::$app->response->redirect('/player');
             }
+
         }
 
         $find_music = $player->find_music_for_playlist();
@@ -40,7 +42,8 @@ class PlayerController extends Controller
             'playlist',
             'user_playlist',
             'player',
-            'find_music'
+            'find_music',
+            'r'
         ));
     }
 }

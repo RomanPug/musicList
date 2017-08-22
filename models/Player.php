@@ -39,7 +39,7 @@ class Player extends ActiveRecord
             ['music_name', 'string', 'max' => 30, 'tooLong' => 'Название не может быть длинее 15 символов'],
             ['user_id', 'required'],
             ['playlist_id', 'required', 'message' => 'Поле не может быть пустым'],
-            [['music_default_name_file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'mp3'],
+            [['music_default_name'], 'file', 'skipOnEmpty' => true, 'extensions' => 'mp3'],
         ];
     }
 

@@ -25,8 +25,6 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/jquery-ui.min.js',
         'js/main.js',
-        'js/jquery.media.js',
-        'js/audio.js',
     ];
 
     public $depends = [

@@ -7,6 +7,8 @@ use yii\bootstrap\Modal;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 
+$this->title = 'Аудиоплеер';
+
 ?>
 <?php static $fm; ?>
 <section>
@@ -23,9 +25,8 @@ use yii\helpers\Url;
                             <h4>Аудиоплеер</h4>
                         </div>
                         <div class="col-sm-2">
-                            <a href="<?= Url::to(['/site/logout']) ?>">Выйти</a>
+                            <?= Html::a('Выйти', ['/site/logout'], ['class'=>'btn btn-danger exit']) ?>
                         </div>
-
                     </div>
                     <div class="row pad">
                         <div class="col-sm-5 player_block_1">
@@ -34,13 +35,10 @@ use yii\helpers\Url;
                                     <div class="mini-menu">
                                         <h5>Плейлисты</h5>
                                         <ul>
-                                            <li>
-                                                <a href="#" style="color: #676767; font-size: 16px">Все аудиозаписи</a>
-                                            </li>
                                             <?php foreach ($user_playlist as $upl): ?>
                                                 <li>
                                                     <a href="<?= Url::to(['/player', 'playlist_id' => $upl['id']]) ?>"
-                                                       data="<?= $upl['id'] ?>"><?= $upl['playlist_name'] . ' / ' . $upl['id'] ?></a>
+                                                       data="<?= $upl['id'] ?>"><?= $upl['playlist_name'] ?></a>
                                                 </li>
                                             <?php endforeach; ?>
                                         </ul>
@@ -55,46 +53,44 @@ use yii\helpers\Url;
                                 <div class="col-sm-12 player-music pad">
                                     <div class="mini-menu-player">
                                         <h5>Аудиозаписи</h5>
-                                        <table class="table" align="center">
+                                        <?php $r ?>
+                                        <?php if (count($find_music) === 0): ?>
+                                            <p> Тут аудио пока нет. Добавте песню в этот плейлист</p>
+                                        <?php else: ?>
+                                        <ul class="playlist">
+                                            <?php foreach ($find_music as $fm): ?>
+                                                <li audiourl="uploads/<?= $fm['playlist_id'] ?>/<?= $fm['music_default_name'] ?>.mp3">
+                                                    <?= $fm['music_name'] ?>
+                                                </li>
+                                            <?php endforeach; ?>
 
-<!--                                            --><?php //if (count($find_music) === 0): ?>
-<!--                                                <li> Тут аудио пока нет. Добавте песню в этот плейлист</li>-->
-<!--                                            --><?php //else: ?>
-                                                <table class="table" align="center">
-                                                    <?php foreach ($find_music as $fm): ?>
-<!--                                                        <li>-->
-                                                            <!--                                                    <a href="#">-->
-                                                            <? //= $fm['music_name'] . ' / ' . $fm['id'] ?><!--</a>-->
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:void(0)"
-                                                                       class="track play_track"
-                                                                       data-track="uploads/<?= $fm['playlist_id'] ?>/<?= $fm['music_default_name'] ?>.mp3"></a>
-                                                                </td>
-                                                                <td>
-                                                                    <?= $fm['music_name'] ?>
-                                                                </td>
-                                                                <td class="time"></td>
-                                                            </tr>
-<!--                                                        </li>-->
-                                                    <?php endforeach; ?>
-
-<!--                                            --><?php //endif; ?>
-                                        </table>
-                                            <audio id="audio" src="uploads/<?= $fm['playlist_id'] ?>/<?= $fm['music_default_name'] ?>.mp3"></audio>
-
-                                            <section class="playy">
-                                                <span class="play player" style="cursor: pointer;"></span>
-                                                <span class="tooltip"></span> <!-- Tooltip -->
-                                                <div id="slider"></div> <!-- the Slider -->
-                                                <span class="volume"></span> <!-- Volume -->
-                                            </section>
+                                            <?php endif; ?>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row music-button">
+                            <div class="row">
                                 <div class="col-sm-12">
-
+                                    <?php if (count($find_music) != 0): ?>
+                                    <div class="player">
+                                        <div class="title"></div>
+                                        <div class="controls">
+                                            <div class="play"></div>
+                                            <div class="pause"></div>
+                                            <div class="rew"></div>
+                                            <div class="fwd"></div>
+                                        </div>
+                                        <div class="volume_block">
+                                            <input class="volume" id="volume" type="range" min="0" max="100" value="80">
+                                        </div>
+                                        <div class="time_block">
+                                            <span class="curtime" id="curtime">00:00</span>
+                                            <div class="tracker ui-state"></div>
+                                            <span class="durtime" id="durtime">00:00</span>
+                                            <!--                                            <div class="mute" id="mute">Mute</div>-->
+                                        </div>
+                                    </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
