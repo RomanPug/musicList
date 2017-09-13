@@ -53,7 +53,6 @@ $this->title = 'Аудиоплеер';
                                 <div class="col-sm-12 player-music pad">
                                     <div class="mini-menu-player">
                                         <h5>Аудиозаписи</h5>
-                                        <?php $r ?>
                                         <?php if (count($find_music) === 0): ?>
                                             <p> Тут аудио пока нет. Добавте песню в этот плейлист</p>
                                         <?php else: ?>

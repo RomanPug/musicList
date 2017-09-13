@@ -22,35 +22,67 @@ $(document).ready(function () {
             var durtime = song.duration;
 
             var curMin = parseInt(curtime / 60);
-            if (curMin<10) {curMin = '0' + curMin;}
+            if (curMin < 10) {
+                curMin = '0' + curMin;
+            }
             var durMin = parseInt(durtime / 60);
-            if (durMin<10) {durMin = '0' + durMin;}
+            if (durMin < 10) {
+                durMin = '0' + durMin;
+            }
 
             var curSec = parseInt(curtime - (curMin * 60));
-            if (curSec<10) {curSec = '0' + curSec;}
+            if (curSec < 10) {
+                curSec = '0' + curSec;
+            }
             var durSec = parseInt(durtime - (durMin * 60));
-            if (durSec<10) {durSec = '0' + durSec;}
+            if (durSec < 10) {
+                durSec = '0' + durSec;
+            }
 
             $('#curtime').text(curMin + ':' + curSec);
             $('#durtime').text(durMin + ':' + durSec);
 
             var curtimeSlider = parseInt(curtime, 10);
-                tracker.slider('value', curtimeSlider);
+            tracker.slider('value', curtimeSlider);
 
-            // if (curtime === durtime) {
-            //     stopAudio();
-            //
-            //     var next = $('.playlist li.active').next();
-            //     if (next.length === 0) {
-            //         next = $('.playlist li:first-child');
-            //     }
-            //     initAudio(next);
-            //     playAudio();
-            // }
+
+            if (song.currentTime === song.duration) {
+                nextAuto();
+            }
         });
+
 
         $('.playlist li').removeClass('active');
         elem.addClass('active');
+    }
+
+    function nextAuto() {
+        $('.pause').trigger('eventclick');
+
+        var next = $('.playlist li.active').next();
+        if (next.length === 0) {
+            next = $('.playlist li:first-child');
+        }
+
+        song.currentTime = 0;
+
+        tracker.slider('value', song.currentTime);
+
+        initAudio(next);
+
+        $('.play').trigger('eventclick', function (e) {
+            e.preventDefault();
+
+            song.play();
+            tracker.slider("option", "max", song.duration);
+            song.volume = defaultVol / 100;
+
+            $('.play').addClass('hidden');
+            $('.pause').addClass('visible');
+        } );
+
+        song.pause();
+        song.play();
     }
 
     function playAudio() {
@@ -83,28 +115,60 @@ $(document).ready(function () {
 
     $('.fwd').click(function (e) {
         e.preventDefault();
-        var defvol = song.volume;
-        stopAudio();
+        song.pause();
 
         var next = $('.playlist li.active').next();
         if (next.length === 0) {
             next = $('.playlist li:first-child');
         }
         initAudio(next);
-        song.volume = defvol;
+        song.currentTime = 0;
+
+        tracker.slider('value', song.currentTime);
+
+
+
+        $('.play').trigger('eventclick', function (e) {
+            e.preventDefault();
+
+            song.play();
+            tracker.slider("option", "max", song.duration);
+            song.volume = defaultVol / 100;
+
+            $('.play').addClass('hidden');
+            $('.pause').addClass('visible');
+        } );
+
+        song.play();
     });
 
     $('.rew').click(function (e) {
         e.preventDefault();
-        var defvol = song.volume;
-        stopAudio();
+        song.pause();
 
         var prev = $('.playlist li.active').prev();
         if (prev.length === 0) {
             prev = $('.playlist li:last-child');
         }
         initAudio(prev);
-        song.volume = defvol;
+        song.currentTime = 0;
+
+        tracker.slider('value', song.currentTime);
+
+
+
+        $('.play').trigger('eventclick', function (e) {
+            e.preventDefault();
+
+            song.play();
+            tracker.slider("option", "max", song.duration);
+            song.volume = defaultVol / 100;
+
+            $('.play').addClass('hidden');
+            $('.pause').addClass('visible');
+        } );
+
+        song.play();
     });
 
     function that(el) {
@@ -158,19 +222,21 @@ $(document).ready(function () {
 
     });
 
+
     tracker.slider({
         range: 'min',
         min: 0,
         max: 10,
         value: 0,
         animate: true,
-        start: function(event,ui) {},
-        slide: function(event, ui) {
-            song.currentTime = ui.value;
-
-
+        start: function (event, ui) {
         },
-        stop: function(event,ui) {}
+        slide: function (event, ui) {
+            song.currentTime = ui.value;
+        },
+        stop: function (event, ui) {
+        }
     });
+
 
 });
