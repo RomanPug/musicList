@@ -126,8 +126,6 @@ $(document).ready(function () {
 
         tracker.slider('value', song.currentTime);
 
-
-
         $('.play').trigger('eventclick', function (e) {
             e.preventDefault();
 
@@ -154,8 +152,6 @@ $(document).ready(function () {
         song.currentTime = 0;
 
         tracker.slider('value', song.currentTime);
-
-
 
         $('.play').trigger('eventclick', function (e) {
             e.preventDefault();
